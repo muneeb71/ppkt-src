@@ -8,17 +8,18 @@ import MainContext from "./Context/Maincontext";
 
 function App() {
   const [isNightMode, setIsNightMode] = useState(true);
+  useEffect(() => {
+    document.title = 'PPKT'
+  }, [])
   return (
-
-
-      <MainContext.Provider value={{ isNightMode, setIsNightMode }}>
+    <MainContext.Provider value={{ isNightMode, setIsNightMode }}>
       <div className="App">
         <Router>
           <ToastContainer />
           <AllRoutes />
         </Router>
       </div>
-      </MainContext.Provider>
+    </MainContext.Provider>
   );
 }
 

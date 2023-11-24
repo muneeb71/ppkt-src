@@ -70,7 +70,7 @@ const Login = () => {
       const _pass = localStorage.getItem("password");
       setPassword(_pass);
     }
-  }, [links]);
+  }, []);
 
   const handleLinkClick = (linkName) => {
     setActiveLink(linkName);
@@ -90,9 +90,12 @@ const Login = () => {
           password,
         }
       );
-      console.log(response);
+      const data = response.data.data;
       if (response.status == 200) {
-        const data = response.data.data;
+        if (response.data.inactive) {
+          toast.error("Please verify Email!");
+          return;
+        }
         localStorage.setItem("token", JSON.stringify(data.token));
         localStorage.setItem("user", JSON.stringify(data.user));
         navigate("dashboard");
